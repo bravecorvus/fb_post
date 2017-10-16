@@ -25,7 +25,7 @@ func main() {
 	// os.Getenv("")
 	// hostPort := net.JoinHostPort("0.0.0.0", os.Getenv("PORT"))
 	// SharedVolumePath, _ = filepath.Abs(os.Getenv("MOUNTPATH"))
-	SharedVolumePath = "/exports/assets"
+	// SharedVolumePath = "/exports/assets"
 	http.HandleFunc("/", Post)
 	// http.ListenAndServe(hostPort, nil)
 	http.ListenAndServe(":8080", nil)
@@ -46,8 +46,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 		posttype = "video"
 		postextension = ".mp4"
 	}
-	fmt.Println(SharedVolumePath + "/" + query.Id + postextension)
-	uploadfile, err := os.Open(SharedVolumePath + "/" + query.Id + postextension)
+	uploadfile, err := os.Open(query.Id + postextension)
 	res, e := fb.Post("/924875817589943/videos", fb.Params{
 		"type": posttype,
         "name": "",
